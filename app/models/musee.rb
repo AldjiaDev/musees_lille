@@ -1,5 +1,3 @@
 class Musee < ApplicationRecord
-  validates :name, :address, presence: true
-  geocoded_by :address
-  after_validation :geocode
+  validates :name, :address, :latitude, :longitude, presence: true
 end

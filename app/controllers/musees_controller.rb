@@ -1,4 +1,7 @@
 class MuseesController < ApplicationController
+
+  before_action :set_musee, only: %i[show edit update destroy]
+
   def index
     @musees = Musee.all
   end
@@ -21,7 +24,6 @@ class MuseesController < ApplicationController
   end
 
   def edit
-    @musee = Musee.find(params[:id])
   end
 
   def update
@@ -34,11 +36,16 @@ class MuseesController < ApplicationController
   end
 
   def destroy
-    @musee = Musee.find(params[:id])
-    @musee.destroyredirect_to musees_path, notice: "Musée supprimé."
+    @musee.destroy
+    redirect_to musees_url, notice: "Musée supprimé avec succès."
   end
 
   private
+
+  def set_musee
+    @musee = Musee.find(params[:id])
+  end
+  
   def musee_params
     params.require(:musee).permit(:name, :address, :description, :latitude, :longitude)
   end
