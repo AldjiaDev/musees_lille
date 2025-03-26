@@ -1,4 +1,5 @@
 class MuseesController < ApplicationController
+
   before_action :set_musee, only: %i[show edit update destroy]
 
   def index
@@ -6,6 +7,7 @@ class MuseesController < ApplicationController
   end
 
   def show
+    @musee = Musee.find(params[:id])
   end
 
   def new
@@ -15,7 +17,7 @@ class MuseesController < ApplicationController
   def create
     @musee = Musee.new(musee_params)
     if @musee.save
-      redirect_to @musee, notice: "Musée créé avec succès."
+      redirect_to @musee, notice: "Musée ajouté avec succès."
     else
       render :new
     end
@@ -25,6 +27,7 @@ class MuseesController < ApplicationController
   end
 
   def update
+    @musee = Musee.find(params[:id])
     if @musee.update(musee_params)
       redirect_to @musee, notice: "Musée mis à jour avec succès."
     else
@@ -42,8 +45,8 @@ class MuseesController < ApplicationController
   def set_musee
     @musee = Musee.find(params[:id])
   end
-
+  
   def musee_params
-    params.require(:musee).permit(:name, :address, :latitude, :longitude)
+    params.require(:musee).permit(:name, :address, :description, :latitude, :longitude)
   end
 end
