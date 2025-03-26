@@ -1,5 +1,4 @@
 class MuseesController < ApplicationController
-
   before_action :set_musee, only: %i[show edit update destroy]
 
   def index
@@ -45,7 +44,7 @@ class MuseesController < ApplicationController
   def set_musee
     @musee = Musee.find(params[:id])
   end
-  
+
   def musee_params
     params.require(:musee).permit(:name, :address, :description, :latitude, :longitude)
   end

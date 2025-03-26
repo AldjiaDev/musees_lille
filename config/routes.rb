@@ -18,11 +18,4 @@ Rails.application.routes.draw do
 
   resources :musees
   root "musees#index"
-
-
-  # Defines the root path route ("/")
-  # root "posts#index"
-  #
-  resources :musees
-  get "musees", to: "musees#index"
 end
