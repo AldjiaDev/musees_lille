@@ -1,0 +1,22 @@
+<div id="map" style="height: 400px;"></div>
+
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.css" rel="stylesheet">
+
+<script>
+  mapboxgl.accessToken = "<%= ENV['MAPBOX_API_KEY'] %>";
+
+  // Création de la carte
+  var map = new mapboxgl.Map({
+    container: 'map', // ID du conteneur pour la carte
+    style: 'mapbox://styles/mapbox/streets-v11', // Style de la carte
+    center: [<%= @musee.longitude %>, <%= @musee.latitude %>], // Coordonnées du musée
+    zoom: 15 // Niveau de zoom
+  });
+
+  // Ajout d'un marqueur
+  new mapboxgl.Marker()
+    .setLngLat([<%= @musee.longitude %>, <%= @musee.latitude %>])
+    .addTo(map);
+</script>
+
